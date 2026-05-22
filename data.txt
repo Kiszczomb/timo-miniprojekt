@@ -1,0 +1,57 @@
+Liczba osiedli = 24
+Liczba dostępnych patroli = 15
+
+Populacja osiedli:
+osiedle 1: 25
+osiedle 2: 18
+osiedle 3: 32
+osiedle 4: 20
+osiedle 5: 35
+osiedle 6: 45
+osiedle 7: 25
+osiedle 8: 50
+osiedle 9: 34
+osiedle 10: 15
+osiedle 11: 12
+osiedle 12: 29
+osiedle 13: 24
+osiedle 14: 11
+osiedle 15: 10
+osiedle 16: 8
+osiedle 17: 9
+osiedle 18: 12
+osiedle 19: 19
+osiedle 20: 7
+osiedle 21: 10
+osiedle 22: 5
+osiedle 23: 8
+osiedle 24: 7
+
+Sąsiedztwa osiedli:
+1 z 2,3,6,7
+2 z 1,3,4,5,6,21
+3 z 1,2,8,9,15,21
+4 z 2,5,10,12,21,22
+5 z 2,4,6,10,19
+6 z 1,2,5,7,13,19,20
+7 z 1,6,9,13,14
+8 z 3,9,11,15,16
+9 z 3,7,8,11,14
+10 z 4,5,12,17,18,19
+11 z 8,9,14,16,24
+12 z 4,10,17,22,23
+13 z 6,7,20
+14 z 7,9,11,13,24
+15 z 3,8,16,21
+16 z 8,11,15
+17 z 10,12,18,23
+18 z 10,17,19
+19 z 5,6,10,18,20
+20 z 6,13,19
+21 z 2,3,4,15,22
+22 z 4,12,21,23
+23 z 12,17,22
+24 z 11,14
+
+Treść zadania:
+Miasto podzielone jest na 24 osiedla. Policja ma do dyspozycji 15 patroli i musi zdecydować do których osiedli wysłać patrole. Aby to zrobić, patrole mają być rozmieszczone w taki sposób, że dla każdego osiedla na nim oraz na osiedlach bezpośrednio z nim sąsiadujących ma znależć się co najmniej N patroli, przy czym N ma być największe możliwe. Dodatkowo aby lepiej pokryć najbardziej zaludnione osiela miasta, suma liczby mieszkańców osiedli, w których są patrole ma być największa możliwa przy uwzględnieniu maksymalizacji głównej funkcji celu, czyli liczby N.
