@@ -89,7 +89,7 @@ class SettlementGraph:
         plt.figure(figsize=(12, 10))
 
         # Użyj spring layout dla czytelnego rozmieszczenia
-        pos = nx.spring_layout(self.graph, k=2, iterations=50, seed=42)
+        pos = nx.spring_layout(self.graph, seed=42)
 
         # Przygotuj kolory węzłów
         if patrol_assignment:
@@ -107,7 +107,7 @@ class SettlementGraph:
         nx.draw_networkx_edges(self.graph, pos, alpha=0.3, width=1)
         nx.draw_networkx_labels(self.graph, pos, font_size=8, font_weight='bold')
 
-        plt.title("Graf osiedli - patrole zaznaczone na czerwono", fontsize=14)
+        plt.title("Graf osiedli, patrole zaznaczone na czerwono", fontsize=14)
         plt.axis('off')
         plt.tight_layout()
 

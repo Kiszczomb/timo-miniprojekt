@@ -64,6 +64,7 @@ class PatrolOptimizer:
         prob += pulp.lpSum([x[i] for i in self.settlements]) == self.num_patrols, "TotalPatrols"
 
         # Rozwiąż problem
+        print(prob)
         prob.solve(pulp.PULP_CBC_CMD(msg=0))
 
         # Sprawdź status
