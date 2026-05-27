@@ -28,21 +28,13 @@ class PatrolOptimizer:
         self.settlements = self.graph.get_all_settlements()
 
     def phase1_maximize_n(self):
-        """
-        Faza 1: Maksymalizacja minimalnego pokrycia N.
 
-        Każde osiedle musi mieć co najmniej N patroli pokrywających je
-        (patrol na nim samym + patrole na sąsiadach).
-
-        Returns:
-            tuple: (optimal_N, assignment_dict)
-        """
         print("Faza 1: Maksymalizacja minimalnego pokrycia N...")
 
         # Stwórz problem optymalizacyjny
         prob = pulp.LpProblem("MaximizeMinCoverage", pulp.LpMaximize)
 
-        # Zmienne decyzyjne: x[i] = 1 jeśli patrol w osiedlu i, 0 w p.p.
+        # Zmienne decyzyjne: x[i] = 1 jeśli patrol w osiedlu i, 0 inaczej
         x = pulp.LpVariable.dicts("patrol",
                                   self.settlements,
                                   cat='Binary')
@@ -81,24 +73,13 @@ class PatrolOptimizer:
         return optimal_n, assignment
 
     def phase2_maximize_population(self, fixed_n):
-        """
-        Faza 2: Maksymalizacja populacji przy ustalonym N.
 
-        Przy ograniczeniu, że każde osiedle ma pokrycie >= fixed_n,
-        maksymalizujemy sumę populacji osiedli z patrolami.
-
-        Args:
-            fixed_n: Optymalne N z Fazy 1
-
-        Returns:
-            tuple: (total_population, assignment_dict)
-        """
         print(f"\nFaza 2: Maksymalizacja populacji przy N = {fixed_n}...")
 
         # Stwórz problem optymalizacyjny
         prob = pulp.LpProblem("MaximizePopulation", pulp.LpMaximize)
 
-        # Zmienne decyzyjne: x[i] = 1 jeśli patrol w osiedlu i, 0 w p.p.
+        # Zmienne decyzyjne: x[i] = 1 jeśli patrol w osiedlu i, 0 inaczej
         x = pulp.LpVariable.dicts("patrol",
                                   self.settlements,
                                   cat='Binary')
@@ -120,6 +101,7 @@ class PatrolOptimizer:
         prob += pulp.lpSum([x[i] for i in self.settlements]) == self.num_patrols, "TotalPatrols"
 
         # Rozwiąż problem
+        print(prob)
         prob.solve(pulp.PULP_CBC_CMD(msg=0))
 
         # Sprawdź status
@@ -139,19 +121,8 @@ class PatrolOptimizer:
         return total_pop, assignment
 
     def optimize(self):
-        """
-        Wykonuje pełną optymalizację dwufazową.
 
-        Returns:
-            dict: Kompletne rozwiązanie z kluczami:
-                - optimal_n: optymalne minimalne pokrycie
-                - assignment: słownik {settlement_id: 0/1}
-                - total_population: suma populacji w osiedlach z patrolami
-                - patrolled_settlements: lista ID osiedli z patrolami
-        """
-        print("=" * 60)
         print("OPTYMALIZACJA DWUFAZOWA")
-        print("=" * 60)
 
         # Faza 1: Maksymalizacja N
         optimal_n, assignment1 = self.phase1_maximize_n()
@@ -166,9 +137,7 @@ class PatrolOptimizer:
         # Lista osiedli z patrolami
         patrolled_settlements = sorted([i for i in assignment2 if assignment2[i] == 1])
 
-        print("\n" + "=" * 60)
-        print("ROZWIĄZANIE OPTYMALNE")
-        print("=" * 60)
+        print("\n" + "ROZWIĄZANIE OPTYMALNE")
 
         return {
             'optimal_n': optimal_n,
@@ -176,27 +145,3 @@ class PatrolOptimizer:
             'total_population': total_pop,
             'patrolled_settlements': patrolled_settlements
         }
-
-
-if __name__ == '__main__':
-    # Test optymalizatora
-    from data_parser import parse_data_txt
-    from graph_model import SettlementGraph
-
-    print("Test optymalizatora...\n")
-
-    # Wczytaj dane
-    num_settlements, num_patrols, populations, adjacency_list = parse_data_txt('data.txt')
-
-    # Stwórz graf
-    graph = SettlementGraph(populations, adjacency_list)
-
-    # Uruchom optymalizator
-    optimizer = PatrolOptimizer(graph, num_patrols)
-    solution = optimizer.optimize()
-
-    # Wyświetl wyniki
-    print(f"\nOptymalne N (minimalne pokrycie): {solution['optimal_n']}")
-    print(f"Suma populacji w osiedlach z patrolami: {solution['total_population']}")
-    print(f"Osiedla z patrolami: {solution['patrolled_settlements']}")
-    print(f"Liczba osiedli z patrolami: {len(solution['patrolled_settlements'])}")

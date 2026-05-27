@@ -1,10 +1,4 @@
 def get_problem_data():
-    """
-    Zwraca dane problemu optymalizacji patroli.
-
-    Returns:
-        tuple: (num_settlements, num_patrols, populations, adjacency_list)
-    """
     num_settlements = 24
     num_patrols = 15
 
@@ -65,17 +59,3 @@ def get_problem_data():
     }
 
     return num_settlements, num_patrols, populations, adjacency_list
-
-
-if __name__ == '__main__':
-    # Test danych
-    num_settlements, num_patrols, populations, adjacency_list = get_problem_data()
-
-    print(f"Liczba osiedli: {num_settlements}")
-    print(f"Liczba patroli: {num_patrols}")
-    print(f"\nPrzykładowe populacje:")
-    for i in range(1, 6):
-        print(f"  Osiedle {i}: {populations[i]} mieszkańców")
-    print(f"\nPrzykładowe sąsiedztwa:")
-    for i in range(1, 6):
-        print(f"  Osiedle {i} sąsiaduje z: {adjacency_list[i]}")
