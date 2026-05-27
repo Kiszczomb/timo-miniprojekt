@@ -123,21 +123,18 @@ if prob.status == pulp.LpStatusOptimal:
     print(f"[RESULT] Łączna populacja osiedli z patrolem: {populacja_z_patrolem} tys. mieszkańców")
     
     print(f"\n[RESULT] Szczegółowe pokrycie dla każdego osiedla (własny patrol + patrole sąsiadów):")
-    for i in osiedla:
-        pokrycie = int(x[i].varValue + sum(x[j].varValue for j in sasiedzi[i]))
-        czy_patrol = "TAK" if x[i].varValue else "NIE"
-        print(f"Osiedle {i:2d}: Patrol: {czy_patrol}, Łącznie w zasięgu: {pokrycie}")
-else:
-    print("Nie udało się znaleźć optymalnego rozwiązania.")
-    
-# if prob.status == pulp.LpStatusOptimal:
-#     rysuj_mape(osiedla, sasiedzi, wybrane_osiedla)
-    
-# Wywołanie funkcji (upewnij się, że ten kod znajduje się wewnątrz bloku sprawdzającego status)
-if prob.status == pulp.LpStatusOptimal:
-    # Obliczamy pokrycie dla każdego osiedla i zapisujemy do słownika
     pokrycie_dict = {}
     for i in osiedla:
         pokrycie_dict[i] = int(x[i].varValue + sum(x[j].varValue for j in sasiedzi[i]))
+        czy_patrol = "TAK" if x[i].varValue else "NIE"
+        print(f"Osiedle {i:2d}: Patrol: {czy_patrol}, Łącznie w zasięgu: {pokrycie_dict[i]}")
         
+    # rysowanie grafu z wynikami
     rysuj_graf(osiedla, sasiedzi, wybrane_osiedla, pokrycie_dict, populacja)
+else:
+    print("Nie udało się znaleźć optymalnego rozwiązania.")
+    
+    
+
+        
+    
