@@ -64,9 +64,6 @@ $$\sum_{i \in V} x_i = 15 \qquad (\text{dokładnie 15 patroli})$$
 
 $$x_i \in \{0, 1\}, \quad N \in \{0, 1, \dots, 15\}$$
 
-> W pliku `equations.txt` ograniczenia zapisane są w postaci znormalizowanej
-> $-N + \sum_{j \in \mathcal{N}[i]} x_j \ge 0$, co jest równoważne $\sum x_j \ge N$.
-
 **Wynik tej fazy:** $N^{*} = 3$ (przenoszone do Fazy 2 jako stała).
 
 ---
