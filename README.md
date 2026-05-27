@@ -48,8 +48,8 @@ Ograniczenia:
 ### Wyniki optymalne
 
 - **N = 3** - każde osiedle ma co najmniej 3 patrole pokrywające je
-- **Suma populacji: 316 / 470** (67.2% całkowitej populacji miasta)
-- **15 osiedli z patrolami**: 3, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15, 17, 19, 23, 24
+- **Suma populacji: 325 / 470** (67.2% całkowitej populacji miasta)
+- **15 osiedli z patrolami**: 3, 4, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 23, 24
 
 #### Rozkład pokrycia:
 - 13 osiedli: pokrycie = 3 patrole (minimum)
